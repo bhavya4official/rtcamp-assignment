@@ -7,6 +7,9 @@ class LoginPage {
         this.password = page.locator('#password');
         this.loginButton = page.locator('#login-button');
         this.errorMessage = page.locator('.error-message-container .error');
+        // Below locators are for landing page after login
+        this.burgerMenu = page.locator('#react-burger-menu-btn');
+        this.logoutButton = page.locator('#logout_sidebar_link');
     }
 
     // Method to navigate to the login page
@@ -15,7 +18,6 @@ class LoginPage {
         // Wait for the username field to be visible before proceeding
         await this.username.waitFor({ state: 'visible' });
     }
-
 
     // Method to login with the provided username and password
     async login(username, password) {
@@ -29,7 +31,7 @@ class LoginPage {
     async loginWithEmptyCred() {
         await this.loginButton.click();
         // Wait for the error message to be visible and return its text content
-        await this.errorMessage.waitFor({ state: 'visible' });
+        // await this.errorMessage.waitFor({ state: 'visible' });
         return this.errorMessage.textContent();
     }
 
@@ -39,8 +41,15 @@ class LoginPage {
         await this.password.fill(password);
         await this.loginButton.click();
         // Wait for the error message to be visible and return its text content
-        await this.errorMessage.waitFor({ state: 'visible' });
+        // await this.errorMessage.waitFor({ state: 'visible' });
         return this.errorMessage.textContent();
+    }
+
+    // Method to logout from the application
+    async logout() {
+        // Click on the burger menu and then click on the logout button
+        await this.burgerMenu.click();
+        await this.logoutButton.click();
     }
 
 }
