@@ -4,6 +4,8 @@ const { POManager } = require('../pageObjects/POManager.js'); // Import the POMa
 test.describe('All Items Page Tests', () => {
     let page;
     let poManager; // Declare POManager variable
+    const username = process.env.USER; // Get username from environment variable
+    const password = process.env.PASSWORD; // Get password from environment variable
 
     test.beforeEach(async ({ browser }) => {
         page = await browser.newPage(); // Create a new page instance for each test
@@ -15,7 +17,7 @@ test.describe('All Items Page Tests', () => {
         await loginPage.navigateToLoginPage();
 
         // Perform login
-        await loginPage.login('standard_user', 'secret_sauce');
+        await loginPage.login(username, password);
 
         // Add assertions to verify successful login
         await expect(page).toHaveURL(/inventory/);
@@ -29,7 +31,7 @@ test.describe('All Items Page Tests', () => {
         const allItemsPage = poManager.getAllItemsPage(); // Get the AllItemsPage instance from POManager
 
         // Select the Z-A sorting option
-        await allItemsPage.selectSortOption('za');
+        await allItemsPage.selectSortOption(process.env.ORDER_ZA);
 
         // Get the sorted items
         const sortedItems = await allItemsPage.getSortedItems();
@@ -50,7 +52,7 @@ test.describe('All Items Page Tests', () => {
         const allItemsPage = poManager.getAllItemsPage(); // Get the AllItemsPage instance from POManager
 
         // Select the high to low sorting option
-        await allItemsPage.selectSortOption('hilo');
+        await allItemsPage.selectSortOption(process.env.ORDER_PRICE_HL);
 
         // Get the sorted items
         const sortedItems = await allItemsPage.getSortedItems();

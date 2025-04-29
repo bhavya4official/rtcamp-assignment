@@ -14,7 +14,7 @@ class LoginPage {
 
     // Method to navigate to the login page
     async navigateToLoginPage() {
-        await this.page.goto('https://www.saucedemo.com/');
+        await this.page.goto('/');
         // Wait for the username field to be visible before proceeding
         await this.username.waitFor({ state: 'visible' });
     }

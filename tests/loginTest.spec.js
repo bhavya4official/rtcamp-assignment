@@ -4,6 +4,8 @@ const { POManager } = require('../pageObjects/POManager.js'); // Import the POMa
 test.describe('Login Scenario Tests', () => {
     let page;
     let poManager; // Declare POManager variable
+    const username = process.env.USER; // Get username from environment variable
+    const password = process.env.PASSWORD; // Get password from environment variable
 
     test.beforeEach(async ({ browser }) => {
         page = await browser.newPage(); // Create a new page instance for each test
@@ -21,7 +23,7 @@ test.describe('Login Scenario Tests', () => {
         await loginPage.navigateToLoginPage();
 
         // Perform login with valid credentials
-        await loginPage.login('standard_user', 'secret_sauce');
+        await loginPage.login(username, password);
 
         // Assertion to verify successful login
         await expect(page, 'Landing on inventory page.').toHaveURL(/inventory/);
@@ -61,7 +63,7 @@ test.describe('Login Scenario Tests', () => {
         await loginPage.navigateToLoginPage();
 
         // Perform login with valid credentials
-        await loginPage.login('standard_user', 'secret_sauce');
+        await loginPage.login(username, password);
 
         // Perform logout from landing page
         await loginPage.logout();
