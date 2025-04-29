@@ -10,9 +10,9 @@ test.describe('Login Scenario Tests', () => {
         poManager = new POManager(page); // Initialize POManager with the new page instance 
     });
 
-    test.afterEach(async () => {
-        await poManager.closeBrowser(); // Close the browser after each test
-    });
+    // test.afterEach(async () => {
+    //     await poManager.closeBrowser(); // Close the browser after each test
+    // });
 
     test('Login with valid credentials', async () => {
         const loginPage = poManager.getLoginPage(); // Get the LoginPage instance from POManager
@@ -35,6 +35,7 @@ test.describe('Login Scenario Tests', () => {
 
         // Perform login with empty credentials
         const errorMessage = await loginPage.loginWithEmptyCred();
+        console.log('Error message:', errorMessage);
 
         // Assertion to verify error message for empty credentials
         expect(errorMessage).toContain('Epic sadface: Username is required');
@@ -53,7 +54,7 @@ test.describe('Login Scenario Tests', () => {
         expect(errorMessage).toContain('Epic sadface: Username and password do not match any user in this service');
     });
 
-    test('#Logout from the application', async () => {
+    test('@Smoke Logout from the application', async () => {
         const loginPage = poManager.getLoginPage(); // Get the LoginPage instance from POManager
 
         // Navigate to the login page

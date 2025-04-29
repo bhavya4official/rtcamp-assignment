@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "rtCamp assignment - https://www.saucedemo.com/",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "smoke": "npx playwright test --grep @smoke",
+    "assignment": "npx playwright test --headed --project=chromium -g @assignment"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

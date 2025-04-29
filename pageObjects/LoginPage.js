@@ -30,9 +30,15 @@ class LoginPage {
     // Method to login with empty credentials
     async loginWithEmptyCred() {
         await this.loginButton.click();
-        // Wait for the error message to be visible and return its text content
-        // await this.errorMessage.waitFor({ state: 'visible' });
-        return this.errorMessage.textContent();
+        try {
+            // Wait for the error message to be visible and return its text content
+            await this.errorMessage.waitFor({ state: 'visible' });
+            return await this.errorMessage.textContent();
+        }
+        catch (error) {
+            console.error('Error message not found:', error); // Log the error if the message is not found
+            return 'Error message not found'; // Return a default message if the error message is not found
+        }
     }
 
     // Method to login with invalid credentials
@@ -41,8 +47,8 @@ class LoginPage {
         await this.password.fill(password);
         await this.loginButton.click();
         // Wait for the error message to be visible and return its text content
-        // await this.errorMessage.waitFor({ state: 'visible' });
-        return this.errorMessage.textContent();
+        await this.errorMessage.waitFor({ state: 'visible' });
+        return await this.errorMessage.textContent();
     }
 
     // Method to logout from the application
