@@ -29,7 +29,6 @@ rtCamp assignment - https://www.saucedemo.com/
 ---
 
 ### Note:
-
 * Video recording of test execution (headed & headless) is present in the Attachments folder.
 * This project is implemented using the Page Object pattern.
 * The dotenv module is used for environment variables & test data.
