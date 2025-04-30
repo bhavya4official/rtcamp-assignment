@@ -23,9 +23,9 @@ test.describe('All Items Page Tests', () => {
         await expect(page).toHaveURL(/inventory/);
     });
 
-    // test.afterEach(async () => {
-    //     await poManager.closeBrowser(); // Close the browser after each test
-    // });
+    test.afterEach(async () => {
+        await poManager.closeBrowser(); // Close the browser after each test
+    });
 
     test('@assignment Verify the sorting order displayed for Z-A on the “All Items” page.', async () => {
         const allItemsPage = poManager.getAllItemsPage(); // Get the AllItemsPage instance from POManager
@@ -48,18 +48,18 @@ test.describe('All Items Page Tests', () => {
 
     });
 
-    test.only('@assignment Verify the price order (high-low) displayed on the “All Items” page.', async () => {
+    test('@assignment Verify the price order (high-low) displayed on the “All Items” page.', async () => {
         const allItemsPage = poManager.getAllItemsPage(); // Get the AllItemsPage instance from POManager
 
         // Select the high to low sorting option
         await allItemsPage.selectSortOption(process.env.ORDER_PRICE_HL);
 
         // Get the sorted items
-        const sortedItems = await allItemsPage.getSortedItems();
+        const sortedPrices = await allItemsPage.getSortedPrices();
 
         // Assert that the items are sorted in descending order of price
-        const isDescending = sortedItems.every((item, index) => {
-            return index === 0 || item.localeCompare(sortedItems[index - 1]) <= 0;
+        const isDescending = sortedPrices.every((price, index) => {
+            return index === 0 || price <= sortedPrices[index - 1];
         });
         expect(isDescending).toBe(true); // Assert that the items are sorted in descending order
     })

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "smoke": "npx playwright test --grep @smoke",
-    "assignment": "npx playwright test --headed --project=chromium -g @assignment"
+    "assignment": "npx playwright test --project=chromium -g @assignment",
+    "e2e": "npx playwright test --project=chromium"
   },
   "keywords": [],
   "author": "",

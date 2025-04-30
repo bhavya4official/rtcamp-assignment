@@ -15,6 +15,11 @@ class AllItemsPage {
         return sortedItems; // Return the sorted items
     }
 
+    async getSortedPrices() {
+        const sortedPrices = await this.page.locator('.inventory_item_price').allTextContents(); // Get the text content of all item prices
+        return sortedPrices.map(price => parseFloat(price.replace('$', ''))); // Convert prices to float and return
+    }
+
     async verifySortingOrderVisually() {
         const screenshotBefore = await this.page.screenshot(); // Take a screenshot before sorting
         await this.page.waitForTimeout(2000); // Wait for 2 seconds to ensure the page is stable

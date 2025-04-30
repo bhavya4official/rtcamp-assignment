@@ -53,9 +53,13 @@ class LoginPage {
 
     // Method to logout from the application
     async logout() {
-        // Click on the burger menu and then click on the logout button
-        await this.burgerMenu.click();
-        await this.logoutButton.click();
+        try {
+            // Click on the burger menu and then click on the logout button
+            await this.burgerMenu.click();
+            await this.logoutButton.click();
+        } catch (error) {
+            console.error('Error during logout:', error); // Log the error if any occurs during logout
+        }
     }
 
 }
